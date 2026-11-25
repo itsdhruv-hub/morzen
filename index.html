@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Morzen Industries | Stronger Connections | Higher Performance</title>
+  <meta name="description" content="Morzen Industries — Industrial Products & Engineering Solutions in Vadodara. Precision Fasteners, Hydraulic Fittings, High-Pressure Connectors, and FRP Cable Trays & Profiles." />
+  <link rel="icon" type="image/png" href="gallery/logo-mark.png" />
+
+  <!-- Typography: Syne / Barlow Condensed + Plus Jakarta Sans + JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" /></noscript>
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Import Map for Three.js, React Three Fiber & GSAP -->
+  <script type="importmap">
+    {
+      "imports": {
+        "react": "https://esm.sh/react@18.3.1",
+        "react-dom": "https://esm.sh/react-dom@18.3.1",
+        "react-dom/client": "https://esm.sh/react-dom@18.3.1/client",
+        "three": "https://esm.sh/three@0.170.0",
+        "@react-three/fiber": "https://esm.sh/@react-three/fiber@8.17.10?external=react,react-dom,three",
+        "gsap": "https://esm.sh/gsap@3.12.5"
+      }
+    }
+  </script>
+</head>
+<body class="is-preloading">
+  <!-- ===================== 3D CINEMATIC LOADING SCREEN ===================== -->
+  <div class="preloader" id="morzen-preloader" role="status" aria-live="polite" aria-label="Loading Morzen Industries">
+    <div class="preloader__canvas-host" id="preloaderCanvasHost" aria-hidden="true"></div>
+    <div class="preloader__aura" aria-hidden="true"></div>
+
+    <div class="preloader__hud">
+      <div class="preloader__ring-stage">
+        <svg class="preloader__ring-svg" viewBox="0 0 220 220" aria-hidden="true">
+          <defs>
+            <linearGradient id="preloaderGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#f3d280" />
+              <stop offset="50%" stop-color="#d4a237" />
+              <stop offset="100%" stop-color="#fff0c2" />
+            </linearGradient>
+          </defs>
+          <circle class="preloader__ring-track" cx="110" cy="110" r="100" />
+          <circle class="preloader__ring-progress" id="preloaderRingProgress" cx="110" cy="110" r="100" />
+        </svg>
+
+        <!-- Fallback emblem if offline / non-WebGL -->
+        <div class="preloader__fallback-emblem" id="preloaderFallbackEmblem" aria-hidden="true">
+          <img src="gallery/logo-mark.png" alt="" />
+          <div class="preloader__fallback-sheen"></div>
+        </div>
+      </div>
+
+      <div class="preloader__wordmark-wrap" id="preloaderWordmarkWrap">
+        <img src="gallery/logo-wordmark.png" alt="Morzen Industries" class="preloader__wordmark" />
+      </div>
+
+      <div class="preloader__counter-row">
+        <span id="preloaderStatus">INITIALIZING PRECISION CORE</span>
+        <span class="preloader__percent" id="preloaderPercent">0%</span>
+      </div>
+    </div>
+
+    <button type="button" class="preloader__skip" id="preloaderSkip">Skip Intro →</button>
+  </div>
+
+  <!-- Scroll Progress Hairline -->
+  <div class="scroll-progress" aria-hidden="true">
+    <div class="scroll-progress__bar" id="scrollProgressBar"></div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <span class="toast__dot"></span>
+    <span class="toast__text" id="toastText">Copied to clipboard</span>
+  </div>
+
+  <!-- ===================== NAVIGATION ===================== -->
+  <header class="navbar" id="navbar">
+    <div class="container navbar__inner">
+      <a href="#hero" class="brand-lockup" aria-label="Morzen Industries Home">
+        <span class="brand-lockup__emblem">
+          <img src="gallery/logo-mark.png" alt="Morzen Industries Emblem" width="44" height="49" />
+        </span>
+        <span class="brand-lockup__text">
+          <span class="brand-lockup__name">MORZEN</span>
+          <span class="brand-lockup__sub">INDUSTRIES</span>
+        </span>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary Navigation">
+        <a href="#overview" class="nav-link">Overview</a>
+        <a href="#products" class="nav-link">Products</a>
+        <a href="#standards" class="nav-link">Grades &amp; Standards</a>
+        <a href="#engineering" class="nav-link">Engineering</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="navbar__actions">
+        <a href="tel:+919033868727" class="nav-phone" title="Call Neel Mistry">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          <span>+91 90338 68727</span>
+        </a>
+        <a href="#contact" class="btn btn--gold btn--sm magnetic" data-rfq-trigger="General Inquiry">
+          <span>Request Quote</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+            <path d="M5 12h14M13 5l7 7-7 7"/>
+          </svg>
+        </a>
+        <button class="hamburger" id="hamburgerBtn" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileDrawer">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation Drawer -->
+  <aside class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+    <div class="mobile-drawer__backdrop" id="drawerBackdrop"></div>
+    <div class="mobile-drawer__panel">
+      <div class="mobile-drawer__top">
+        <div class="brand-lockup">
+          <span class="brand-lockup__emblem">
+            <img src="gallery/logo-mark.png" alt="Morzen Industries Emblem" width="38" height="42" />
+          </span>
+          <span class="brand-lockup__text">
+            <span class="brand-lockup__name">MORZEN</span>
+            <span class="brand-lockup__sub">INDUSTRIES</span>
+          </span>
+        </div>
+        <button class="drawer-close" id="drawerCloseBtn" type="button" aria-label="Close navigation menu">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 6L6 18M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+
+      <nav class="mobile-drawer__nav" aria-label="Mobile Navigation">
+        <a href="#overview" class="mobile-nav-link"><span>01</span> Overview</a>
+        <a href="#products" class="mobile-nav-link"><span>02</span> Product Divisions</a>
+        <a href="#standards" class="mobile-nav-link"><span>03</span> Grades &amp; Standards</a>
+        <a href="#engineering" class="mobile-nav-link"><span>04</span> Engineering &amp; QA</a>
+        <a href="#contact" class="mobile-nav-link"><span>05</span> Direct Inquiry</a>
+      </nav>
+
+      <div class="mobile-drawer__footer">
+        <p class="mono-label">DIRECT CONTACT · NEEL MISTRY</p>
+        <a href="tel:+919033868727" class="mobile-contact-pill">+91 90338 68727</a>
+        <a href="mailto:morzen.industries@gmail.com" class="mobile-contact-pill">morzen.industries@gmail.com</a>
+        <p class="mobile-drawer__addr">306 Opal Square, Alkapuri, Vadodara – 390007</p>
+      </div>
+    </div>
+  </aside>
+
+  <main>
+    <!-- ===================== 1. CINEMATIC VIDEO HERO ===================== -->
+    <section class="hero" id="hero">
+      <div class="hero__media" aria-hidden="true">
+        <video
+          id="heroVideo"
+          class="hero__video"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="auto"
+          poster="gallery/fasteners-hero.jpg"
+        >
+          <source src="gallery/gemini_generated_video_7fcf4208.mp4" type="video/mp4" />
+        </video>
+        <div class="hero__scrim"></div>
+        <div class="hero__grid-overlay"></div>
+        <div class="hero__particles" id="heroParticles"></div>
+      </div>
+
+      <div class="container hero__content">
+        <div class="hero__top-meta reveal-hero">
+          <span class="pill-badge">
+            <span class="pulse-dot"></span>
+            INDUSTRIAL PRODUCTS &amp; ENGINEERING SOLUTIONS
+          </span>
+          <span class="mono-tag">VADODARA · GST 24AKCPM5200E1ZU</span>
+        </div>
+
+        <h1 class="hero__title">
+          <span class="hero__title-line reveal-hero" style="--d: 0.08s">STRONGER CONNECTIONS.</span>
+          <span class="hero__title-line hero__title-line--gold reveal-hero" style="--d: 0.18s">HIGHER PERFORMANCE.</span>
+        </h1>
+
+        <p class="hero__lead reveal-hero" style="--d: 0.28s">
+          Precision-engineered <strong>Fasteners</strong>, <strong>Hydraulic Fittings</strong>,
+          <strong>High-Pressure Connectors</strong>, and <strong>FRP Cable Trays</strong> supplied to
+          global DIN, ISO, ASTM, and BS tolerances for mission-critical infrastructure.
+        </p>
+
+        <div class="hero__cta-row reveal-hero" style="--d: 0.38s">
+          <a href="#products" class="btn btn--gold btn--lg magnetic">
+            <span>Explore Product Matrix</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+              <path d="M5 12h14M13 5l7 7-7 7"/>
+            </svg>
+          </a>
+          <a href="#contact" class="btn btn--glass btn--lg magnetic" data-rfq-trigger="General Industrial Quote">
+            <span>Connect with Director</span>
+          </a>
+          <button type="button" class="video-toggle" id="videoToggleBtn" aria-label="Pause background video">
+            <span class="video-toggle__icon" id="videoToggleIcon">❚❚</span>
+            <span class="video-toggle__label" id="videoToggleLabel">Motion On</span>
+          </button>
+        </div>
+
+        <!-- Bottom Interactive Category Dock -->
+        <div class="hero__dock reveal-hero" style="--d: 0.48s">
+          <a href="#card-fasteners" class="dock-item" data-jump-category="fasteners">
+            <span class="dock-item__num">01</span>
+            <span class="dock-item__body">
+              <strong>Fasteners</strong>
+              <small>SS 304/316/316L · HT 8.8–12.9</small>
+            </span>
+            <span class="dock-item__arrow">↗</span>
+          </a>
+          <a href="#card-fittings" class="dock-item" data-jump-category="fittings">
+            <span class="dock-item__num">02</span>
+            <span class="dock-item__body">
+              <strong>Fittings</strong>
+              <small>Hydraulic Adapters &amp; Crimp</small>
+            </span>
+            <span class="dock-item__arrow">↗</span>
+          </a>
+          <a href="#card-connectors" class="dock-item" data-jump-category="connectors">
+            <span class="dock-item__num">03</span>
+            <span class="dock-item__body">
+              <strong>Connectors</strong>
+              <small>Quick-Disconnect &amp; Pneumatic</small>
+            </span>
+            <span class="dock-item__arrow">↗</span>
+          </a>
+          <a href="#card-frp" class="dock-item" data-jump-category="frp">
+            <span class="dock-item__num">04</span>
+            <span class="dock-item__body">
+              <strong>FRP Cable Trays</strong>
+              <small>Ladder, Perforated &amp; Struts</small>
+            </span>
+            <span class="dock-item__arrow">↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 2. ANIMATED SPECIFICATION MARQUEE ===================== -->
+    <div class="marquee-band" aria-label="Standards and Materials Marquee">
+      <div class="marquee-track">
+        <div class="marquee-group">
+          <span>SS 304</span><i class="sep">◆</i>
+          <span>SS 316</span><i class="sep">◆</i>
+          <span>SS 316L</span><i class="sep">◆</i>
+          <span>HIGH-TENSILE 8.8 / 10.9 / 12.9</span><i class="sep">◆</i>
+          <span>DUPLEX STEEL</span><i class="sep">◆</i>
+          <span>ALLOY STEEL</span><i class="sep">◆</i>
+          <span>DIN · ISO · ASTM · BS</span><i class="sep">◆</i>
+          <span>HYDRAULIC ADAPTERS</span><i class="sep">◆</i>
+          <span>QUICK-DISCONNECT COUPLINGS</span><i class="sep">◆</i>
+          <span>FRP LADDER &amp; PERFORATED TRAYS</span><i class="sep">◆</i>
+        </div>
+        <div class="marquee-group" aria-hidden="true">
+          <span>SS 304</span><i class="sep">◆</i>
+          <span>SS 316</span><i class="sep">◆</i>
+          <span>SS 316L</span><i class="sep">◆</i>
+          <span>HIGH-TENSILE 8.8 / 10.9 / 12.9</span><i class="sep">◆</i>
+          <span>DUPLEX STEEL</span><i class="sep">◆</i>
+          <span>ALLOY STEEL</span><i class="sep">◆</i>
+          <span>DIN · ISO · ASTM · BS</span><i class="sep">◆</i>
+          <span>HYDRAULIC ADAPTERS</span><i class="sep">◆</i>
+          <span>QUICK-DISCONNECT COUPLINGS</span><i class="sep">◆</i>
+          <span>FRP LADDER &amp; PERFORATED TRAYS</span><i class="sep">◆</i>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== 3. BUSINESS OVERVIEW & BRAND SEAL (LIGHT ARCHITECTURAL CONTRAST) ===================== -->
+    <section class="section section--ivory" id="overview">
+      <div class="container overview-grid">
+        <!-- Left: 3D Tilt Brand Credential Pedestal featuring full original logo.png -->
+        <div class="overview-seal-wrap reveal-up">
+          <div class="brand-pedestal tilt-card" data-tilt>
+            <div class="brand-pedestal__corners" aria-hidden="true">
+              <span></span><span></span><span></span><span></span>
+            </div>
+            <div class="brand-pedestal__badge-row">
+              <span class="mono-pill mono-pill--dark">EST. VADODARA · INDIA</span>
+              <span class="mono-pill mono-pill--gold">VERIFIED SUPPLIER</span>
+            </div>
+
+            <div class="brand-pedestal__logo-frame">
+              <img src="gallery/logo.png" alt="Morzen Industries Official Logo" class="brand-pedestal__logo" />
+            </div>
+
+            <p class="brand-pedestal__slogan">Stronger Connections | Higher Performance</p>
+
+            <div class="brand-pedestal__meta">
+              <div class="meta-row">
+                <span class="meta-label">FOUNDER &amp; DIRECTOR</span>
+                <span class="meta-value">Neel Mistry</span>
+              </div>
+              <div class="meta-row">
+                <span class="meta-label">GST REGISTRATION</span>
+                <button type="button" class="meta-copy" data-copy="24AKCPM5200E1ZU" title="Copy GST Number">
+                  <span>24AKCPM5200E1ZU</span>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                </button>
+              </div>
+              <div class="meta-row">
+                <span class="meta-label">HEADQUARTERS</span>
+                <span class="meta-value">306 Opal Square, Alkapuri, Vadodara – 390007</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Narrative, Counters & Engineering Pillars -->
+        <div class="overview-content">
+          <div class="section-eyebrow reveal-up">
+            <span class="eyebrow-line"></span>
+            <span>01 · BUSINESS OVERVIEW</span>
+          </div>
+
+          <h2 class="section-heading section-heading--dark reveal-up">
+            Engineered Supply for High-Demand Industrial Systems.
+          </h2>
+
+          <p class="overview-lead reveal-up">
+            <strong>Morzen Industries</strong> is engaged in trading and supplying industrial products and engineering components, specializing in precision <strong>fasteners</strong>, <strong>fittings</strong>, <strong>connectors</strong>, and <strong>FRP cable trays</strong>. Led by Founder &amp; Director <strong>Neel Mistry</strong> from Vadodara, Gujarat, we bridge metallurgical precision with reliable project delivery.
+          </p>
+
+          <!-- Animated Counters -->
+          <div class="kpi-strip reveal-up">
+            <div class="kpi-box">
+              <div class="kpi-box__num"><span class="counter" data-target="4">0</span><span class="kpi-accent">+</span></div>
+              <div class="kpi-box__label">Core Engineering Divisions</div>
+            </div>
+            <div class="kpi-box">
+              <div class="kpi-box__num"><span class="counter" data-target="6">0</span><span class="kpi-accent">Grades</span></div>
+              <div class="kpi-box__label">SS, Duplex, Alloy &amp; High-Tensile</div>
+            </div>
+            <div class="kpi-box">
+              <div class="kpi-box__num"><span class="counter" data-target="4">0</span><span class="kpi-accent">Stds</span></div>
+              <div class="kpi-box__label">DIN · ISO · ASTM · BS Compliant</div>
+            </div>
+          </div>
+
+          <!-- 4 Interactive Pillar Hover Cards -->
+          <div class="pillars-grid reveal-up">
+            <div class="pillar-card">
+              <span class="pillar-card__icon">01</span>
+              <h3>Precision Metallurgy</h3>
+              <p>Certified SS 304, 316, 316L, Duplex, Alloy Steel &amp; High-Tensile 8.8 / 10.9 / 12.9 grades.</p>
+            </div>
+            <div class="pillar-card">
+              <span class="pillar-card__icon">02</span>
+              <h3>Leak-Proof Sealing</h3>
+              <p>Hydraulic &amp; pneumatic couplings engineered for extreme pressure stability.</p>
+            </div>
+            <div class="pillar-card">
+              <span class="pillar-card__icon">03</span>
+              <h3>Corrosion Immunity</h3>
+              <p>Fire-retardant, lightweight pultruded FRP trays &amp; profiles built for harsh plants.</p>
+            </div>
+            <div class="pillar-card">
+              <span class="pillar-card__icon">04</span>
+              <h3>Custom Fabrication</h3>
+              <p>Non-standard dimensions, specialized coatings, and project-ready kitting to print.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 4. PRODUCT DIVISIONS SHOWCASE (OBSIDIAN + FULL HOVER PHYSICS) ===================== -->
+    <section class="section section--obsidian" id="products">
+      <div class="container">
+        <div class="products-header reveal-up">
+          <div>
+            <div class="section-eyebrow section-eyebrow--light">
+              <span class="eyebrow-line"></span>
+              <span>02 · PRODUCTS &amp; SERVICES</span>
+            </div>
+            <h2 class="section-heading section-heading--light">
+              Four Specialized Industrial Divisions.
+            </h2>
+          </div>
+          <p class="products-header__sub">
+            Hover any division to reveal full technical tolerances, or click <strong>Inspect Specifications</strong> to open the interactive spec sheet and pre-fill your quote request.
+          </p>
+        </div>
+
+        <!-- Interactive Filter Tabs -->
+        <div class="product-filter-bar reveal-up" role="tablist" aria-label="Filter Product Divisions">
+          <button class="filter-chip is-active" type="button" data-filter="all">All Divisions (04)</button>
+          <button class="filter-chip" type="button" data-filter="fasteners">01 · Fasteners</button>
+          <button class="filter-chip" type="button" data-filter="fittings">02 · Fittings</button>
+          <button class="filter-chip" type="button" data-filter="connectors">03 · Connectors</button>
+          <button class="filter-chip" type="button" data-filter="frp">04 · FRP Cable Trays</button>
+        </div>
+
+        <!-- 2x2 Architectural Spotlight Grid -->
+        <div class="products-grid" id="productsGrid">
+          <!-- CARD 1: FASTENERS -->
+          <article class="product-card spotlight-card reveal-up" id="card-fasteners" data-category="fasteners">
+            <div class="product-card__media">
+              <img src="gallery/fasteners-hero.jpg" alt="Precision stainless steel and high-tensile fasteners: hex bolts, Allen cap screws, nuts, washers, and studs" loading="lazy" />
+              <div class="product-card__media-overlay"></div>
+              <span class="product-card__index">DIV // 01</span>
+              <span class="product-card__std-tag">DIN · ISO · ASTM · BS</span>
+            </div>
+
+            <div class="product-card__body">
+              <div class="product-card__title-row">
+                <h3>Industrial Fasteners</h3>
+                <span class="status-pill">Custom Fab Ready</span>
+              </div>
+              <p class="product-card__desc">
+                Structural and precision fastening assemblies engineered for heavy vibration, thermal cycling, and corrosive process environments.
+              </p>
+
+              <div class="spec-tags">
+                <span>Hex Bolts</span>
+                <span>Nuts</span>
+                <span>Allen Cap Screws</span>
+                <span>Washers</span>
+                <span>Studs</span>
+              </div>
+
+              <div class="product-card__grades">
+                <span class="grades-label">GRADES:</span>
+                <span>SS 304 · SS 316 · SS 316L · HT (8.8, 10.9, 12.9) · Duplex · Alloy Steel</span>
+              </div>
+
+              <div class="product-card__footer">
+                <button type="button" class="btn-link open-spec-btn" data-product="fasteners">
+                  <span>Inspect Specifications</span>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                </button>
+                <a href="#contact" class="btn-quote-mini" data-rfq-trigger="Fasteners (SS / High-Tensile)">+ Add to RFQ</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- CARD 2: FITTINGS -->
+          <article class="product-card spotlight-card reveal-up" id="card-fittings" data-category="fittings">
+            <div class="product-card__media">
+              <img src="gallery/fittings-hero.jpg" alt="Precision CNC-machined stainless steel hydraulic adapters, crimp fittings, and pipe fittings" loading="lazy" />
+              <div class="product-card__media-overlay"></div>
+              <span class="product-card__index">DIV // 02</span>
+              <span class="product-card__std-tag">CNC PRECISION THREADS</span>
+            </div>
+
+            <div class="product-card__body">
+              <div class="product-card__title-row">
+                <h3>Hydraulic &amp; SS Fittings</h3>
+                <span class="status-pill">High-Integrity</span>
+              </div>
+              <p class="product-card__desc">
+                Machined adapters, crimped hose terminations, and heavy-wall pipe fittings built for zero-weep fluid power circuits.
+              </p>
+
+              <div class="spec-tags">
+                <span>Hydraulic Adapters</span>
+                <span>Crimp Fittings</span>
+                <span>Stainless Steel Fittings</span>
+                <span>Hydraulic Pipe Fittings</span>
+              </div>
+
+              <div class="product-card__grades">
+                <span class="grades-label">DESIGN:</span>
+                <span>Precision BSP / NPT / JIC / Metric Threads · Vibration-Resistant Bite</span>
+              </div>
+
+              <div class="product-card__footer">
+                <button type="button" class="btn-link open-spec-btn" data-product="fittings">
+                  <span>Inspect Specifications</span>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                </button>
+                <a href="#contact" class="btn-quote-mini" data-rfq-trigger="Hydraulic & SS Fittings">+ Add to RFQ</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- CARD 3: CONNECTORS -->
+          <article class="product-card spotlight-card reveal-up" id="card-connectors" data-category="connectors">
+            <div class="product-card__media">
+              <img src="gallery/connectors-hero.jpg" alt="High-pressure hydraulic quick-disconnect couplings, pneumatic connectors, and industrial sealing sleeves" loading="lazy" />
+              <div class="product-card__media-overlay"></div>
+              <span class="product-card__index">DIV // 03</span>
+              <span class="product-card__std-tag">LEAK-PROOF SEALING</span>
+            </div>
+
+            <div class="product-card__body">
+              <div class="product-card__title-row">
+                <h3>Industrial Connectors</h3>
+                <span class="status-pill">High-Pressure</span>
+              </div>
+              <p class="product-card__desc">
+                Engineered for high-pressure hydraulic and pneumatic systems requiring leak-proof, precision-engineered sealing under rapid coupling cycles.
+              </p>
+
+              <div class="spec-tags">
+                <span>Hydraulic Connectors</span>
+                <span>Pneumatic Connectors</span>
+                <span>Quick-Disconnect Couplings</span>
+                <span>Industrial Connectors</span>
+              </div>
+
+              <div class="product-card__grades">
+                <span class="grades-label">APPLICATION:</span>
+                <span>High-Pressure Hydraulic &amp; Pneumatic Systems · Precision Sealing</span>
+              </div>
+
+              <div class="product-card__footer">
+                <button type="button" class="btn-link open-spec-btn" data-product="connectors">
+                  <span>Inspect Specifications</span>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                </button>
+                <a href="#contact" class="btn-quote-mini" data-rfq-trigger="Connectors & Couplings">+ Add to RFQ</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- CARD 4: FRP CABLE TRAYS & PROFILES -->
+          <article class="product-card spotlight-card reveal-up" id="card-frp" data-category="frp">
+            <div class="product-card__media">
+              <img src="gallery/frp-trays-hero.jpg" alt="Yellow fiberglass reinforced plastic ladder and perforated cable trays with green FRP strut support profiles" loading="lazy" />
+              <div class="product-card__media-overlay"></div>
+              <span class="product-card__index">DIV // 04</span>
+              <span class="product-card__std-tag">FIRE-RETARDANT FRP</span>
+            </div>
+
+            <div class="product-card__body">
+              <div class="product-card__title-row">
+                <h3>FRP Cable Trays &amp; Profiles</h3>
+                <span class="status-pill">Zero-Corrosion</span>
+              </div>
+              <p class="product-card__desc">
+                Fiberglass Reinforced Plastic cable routing &amp; structural support systems combining high load span with lightweight installation.
+              </p>
+
+              <div class="spec-tags">
+                <span>Ladder-Type Cable Trays</span>
+                <span>Perforated Cable Trays</span>
+                <span>Strut Support Profiles</span>
+              </div>
+
+              <div class="product-card__grades">
+                <span class="grades-label">FEATURES:</span>
+                <span>Fiberglass Reinforced Plastic · Corrosion-Resistant · Fire-Retardant · Lightweight</span>
+              </div>
+
+              <div class="product-card__footer">
+                <button type="button" class="btn-link open-spec-btn" data-product="frp">
+                  <span>Inspect Specifications</span>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                </button>
+                <a href="#contact" class="btn-quote-mini" data-rfq-trigger="FRP Cable Trays & Profiles">+ Add to RFQ</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 5. INTERACTIVE METALLURGY & STANDARDS EXPLORER ===================== -->
+    <section class="section section--slate" id="standards">
+      <div class="container">
+        <div class="standards-layout">
+          <div class="standards-left reveal-up">
+            <div class="section-eyebrow section-eyebrow--light">
+              <span class="eyebrow-line"></span>
+              <span>03 · METALLURGY &amp; STANDARDS MATRIX</span>
+            </div>
+            <h2 class="section-heading section-heading--light">
+              Select a Grade or Standard to Inspect Performance.
+            </h2>
+            <p class="standards-lead">
+              Every fastener, fitting, and composite profile is matched to operating pressure, chemical exposure, and mechanical load. Select a material grade below to inspect its engineering profile.
+            </p>
+
+            <div class="grade-selector" id="gradeSelector" role="tablist" aria-label="Material Grade Selector">
+              <button type="button" class="grade-pill is-active" data-grade="ss304">SS 304</button>
+              <button type="button" class="grade-pill" data-grade="ss316">SS 316</button>
+              <button type="button" class="grade-pill" data-grade="ss316l">SS 316L</button>
+              <button type="button" class="grade-pill" data-grade="ht">High-Tensile (8.8 / 10.9 / 12.9)</button>
+              <button type="button" class="grade-pill" data-grade="duplex">Duplex Steel</button>
+              <button type="button" class="grade-pill" data-grade="alloy">Alloy Steel</button>
+              <button type="button" class="grade-pill" data-grade="frp">FRP Composite</button>
+            </div>
+
+            <div class="standards-badges">
+              <span class="std-badge">DIN</span>
+              <span class="std-badge">ISO</span>
+              <span class="std-badge">ASTM</span>
+              <span class="std-badge">BS</span>
+              <span class="std-badge std-badge--gold">CUSTOM FABRICATION</span>
+            </div>
+          </div>
+
+          <div class="standards-right reveal-up">
+            <div class="grade-inspector" id="gradeInspector">
+              <div class="grade-inspector__head">
+                <div>
+                  <span class="mono-label" id="gradeCode">AUSTENITIC STAINLESS · GRADE 304</span>
+                  <h3 id="gradeTitle">SS 304 — All-Purpose Corrosion Resistance</h3>
+                </div>
+                <span class="grade-inspector__tag" id="gradeStandard">DIN / ISO / ASTM</span>
+              </div>
+
+              <p class="grade-inspector__desc" id="gradeDesc">
+                18-8 chromium-nickel austenitic stainless steel delivering clean oxidation resistance, weldability, and dependable mechanical strength across general industrial assemblies, Hex Bolts, Nuts, Washers, and Struts.
+              </p>
+
+              <div class="meter-list">
+                <div class="meter-item">
+                  <div class="meter-item__label">
+                    <span>Corrosion &amp; Oxidation Resistance</span>
+                    <strong id="mCorrVal">84%</strong>
+                  </div>
+                  <div class="meter-track"><div class="meter-fill" id="mCorrBar" style="width: 84%"></div></div>
+                </div>
+                <div class="meter-item">
+                  <div class="meter-item__label">
+                    <span>Mechanical / Tensile Load Capacity</span>
+                    <strong id="mTensVal">76%</strong>
+                  </div>
+                  <div class="meter-track"><div class="meter-fill" id="mTensBar" style="width: 76%"></div></div>
+                </div>
+                <div class="meter-item">
+                  <div class="meter-item__label">
+                    <span>Extreme Environment Durability</span>
+                    <strong id="mEnvVal">80%</strong>
+                  </div>
+                  <div class="meter-track"><div class="meter-fill" id="mEnvBar" style="width: 80%"></div></div>
+                </div>
+              </div>
+
+              <div class="grade-inspector__foot">
+                <div>
+                  <span class="mono-label">BEST SUITED FOR</span>
+                  <p class="grade-fit" id="gradeFit">Hex Bolts, Nuts, Allen Cap Screws, Washers, Studs &amp; General Process Piping</p>
+                </div>
+                <a href="#contact" class="btn btn--gold btn--sm" id="gradeRfqBtn" data-rfq-trigger="SS 304 Grade Components">
+                  Inquire Grade ↗
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 6. ENGINEERING & QUALITY ASSURANCE SPOTLIGHT ===================== -->
+    <section class="section section--ivory" id="engineering">
+      <div class="container engineering-grid">
+        <div class="engineering-visual reveal-up">
+          <div class="blueprint-frame">
+            <img src="gallery/engineering-precision.jpg" alt="Precision micrometer metrology inspection of stainless steel fasteners and hydraulic couplings" loading="lazy" />
+            <div class="blueprint-scan" aria-hidden="true"></div>
+            <div class="callout-chip callout-chip--1">
+              <span class="pulse-dot"></span>
+              <span>Micrometer Tolerance Verification</span>
+            </div>
+            <div class="callout-chip callout-chip--2">
+              <span class="pulse-dot"></span>
+              <span>Leak-Proof Pressure Sealing</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="engineering-copy reveal-up">
+          <div class="section-eyebrow">
+            <span class="eyebrow-line"></span>
+            <span>04 · PRECISION &amp; LEADERSHIP</span>
+          </div>
+          <h2 class="section-heading section-heading--dark">
+            Built for Zero Failure Where Pressure &amp; Load Converge.
+          </h2>
+          <p class="overview-lead">
+            From high-pressure hydraulic lines requiring leak-proof quick-disconnect couplings to chemical facilities demanding fire-retardant FRP cable trays, every component sourced and supplied by Morzen Industries adheres to strict dimensional and metallurgical consistency.
+          </p>
+
+          <ul class="precision-list">
+            <li>
+              <span class="precision-list__num">01</span>
+              <div>
+                <strong>Dimensional &amp; Thread Accuracy</strong>
+                <p>Clean pitch engagement across DIN, ISO, ASTM, and BS specifications with custom fabrication on request.</p>
+              </div>
+            </li>
+            <li>
+              <span class="precision-list__num">02</span>
+              <div>
+                <strong>Zero-Leak Fluid &amp; Pneumatic Transfer</strong>
+                <p>Hydraulic adapters, crimp fittings, and quick-disconnect couplings engineered for pulse and burst stability.</p>
+              </div>
+            </li>
+            <li>
+              <span class="precision-list__num">03</span>
+              <div>
+                <strong>Direct Accountability by Neel Mistry</strong>
+                <p>Founder &amp; Director oversight from technical quotation to dispatch out of Alkapuri, Vadodara.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 7. CONTACT & INTERACTIVE RFQ DESK ===================== -->
+    <section class="section section--obsidian" id="contact">
+      <div class="container contact-grid">
+        <!-- Left: Direct Corporate & Director Credentials -->
+        <div class="contact-info reveal-up">
+          <div class="section-eyebrow section-eyebrow--light">
+            <span class="eyebrow-line"></span>
+            <span>05 · DIRECT CONTACT &amp; RFQ DESK</span>
+          </div>
+          <h2 class="section-heading section-heading--light">
+            Connect Directly with Morzen Industries.
+          </h2>
+          <p class="contact-lead">
+            Share your Bill of Materials (BOM), technical drawings, or grade requirements for rapid industrial pricing and dispatch timelines.
+          </p>
+
+          <div class="director-card">
+            <div class="director-card__header">
+              <div class="director-card__avatar" aria-hidden="true">NM</div>
+              <div>
+                <span class="mono-label">COMPANY CONTACT PERSON</span>
+                <h3>Neel Mistry</h3>
+                <p>Founder &amp; Director · Morzen Industries</p>
+              </div>
+            </div>
+
+            <div class="contact-list">
+              <div class="contact-item">
+                <span class="contact-item__label">PHONE / WHATSAPP</span>
+                <div class="contact-item__value-row">
+                  <a href="tel:+919033868727" class="contact-link">+91 90338 68727</a>
+                  <button type="button" class="copy-icon-btn" data-copy="+91 90338 68727" aria-label="Copy phone number">Copy</button>
+                </div>
+              </div>
+
+              <div class="contact-item">
+                <span class="contact-item__label">OFFICIAL EMAIL</span>
+                <div class="contact-item__value-row">
+                  <a href="mailto:morzen.industries@gmail.com" class="contact-link">morzen.industries@gmail.com</a>
+                  <button type="button" class="copy-icon-btn" data-copy="morzen.industries@gmail.com" aria-label="Copy email address">Copy</button>
+                </div>
+              </div>
+
+              <div class="contact-item">
+                <span class="contact-item__label">OFFICE ADDRESS</span>
+                <p class="contact-text">306 Opal Square, Alkapuri, Vadodara – 390007, Gujarat, India</p>
+              </div>
+
+              <div class="contact-item-split">
+                <div class="contact-item">
+                  <span class="contact-item__label">GST NUMBER</span>
+                  <div class="contact-item__value-row">
+                    <span class="mono-val">24AKCPM5200E1ZU</span>
+                    <button type="button" class="copy-icon-btn" data-copy="24AKCPM5200E1ZU" aria-label="Copy GST number">Copy</button>
+                  </div>
+                </div>
+                <div class="contact-item">
+                  <span class="contact-item__label">WEBSITE</span>
+                  <a href="http://www.morzenindustries.com" target="_blank" rel="noopener noreferrer" class="contact-link">www.morzenindustries.com</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Interactive RFQ Builder -->
+        <div class="rfq-panel reveal-up">
+          <div class="rfq-panel__head">
+            <h3>Build Your Specification Inquiry</h3>
+            <p>Select product categories below to auto-format your technical RFQ for Email or WhatsApp.</p>
+          </div>
+
+          <form id="rfqForm" class="rfq-form" novalidate>
+            <div class="form-group">
+              <label class="form-label">Select Product Categories</label>
+              <div class="rfq-chips" id="rfqChips">
+                <label class="rfq-chip">
+                  <input type="checkbox" name="category" value="Fasteners" checked />
+                  <span>Fasteners</span>
+                </label>
+                <label class="rfq-chip">
+                  <input type="checkbox" name="category" value="Fittings" />
+                  <span>Fittings</span>
+                </label>
+                <label class="rfq-chip">
+                  <input type="checkbox" name="category" value="Connectors" />
+                  <span>Connectors</span>
+                </label>
+                <label class="rfq-chip">
+                  <input type="checkbox" name="category" value="FRP Cable Trays & Profiles" />
+                  <span>FRP Cable Trays</span>
+                </label>
+                <label class="rfq-chip">
+                  <input type="checkbox" name="category" value="Custom Fabrication" />
+                  <span>Custom Fabrication</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="rfqName" class="form-label">Your Name *</label>
+                <input type="text" id="rfqName" class="form-input" placeholder="e.g. Rajesh Patel" required />
+              </div>
+              <div class="form-group">
+                <label for="rfqCompany" class="form-label">Company Name</label>
+                <input type="text" id="rfqCompany" class="form-input" placeholder="e.g. Apex Engineering Pvt. Ltd." />
+              </div>
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="rfqContact" class="form-label">Phone or Email *</label>
+                <input type="text" id="rfqContact" class="form-input" placeholder="+91 ... or name@company.com" required />
+              </div>
+              <div class="form-group">
+                <label for="rfqGrade" class="form-label">Grade / Standard</label>
+                <select id="rfqGrade" class="form-input">
+                  <option value="SS 304 / SS 316 / SS 316L">SS 304 / SS 316 / SS 316L</option>
+                  <option value="High-Tensile (8.8, 10.9, 12.9)">High-Tensile (8.8, 10.9, 12.9)</option>
+                  <option value="Duplex Steel / Alloy Steel">Duplex Steel / Alloy Steel</option>
+                  <option value="DIN / ISO / ASTM / BS Standard">DIN / ISO / ASTM / BS Standard</option>
+                  <option value="FRP Fiberglass Reinforced Plastic">FRP Fiberglass Reinforced Plastic</option>
+                  <option value="Custom Fabrication / Drawing">Custom Fabrication / Drawing</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="rfqSpecs" class="form-label">Sizes, Quantities &amp; Technical Notes</label>
+              <textarea id="rfqSpecs" class="form-input form-textarea" rows="3" placeholder="e.g. M16x60 SS 316 Hex Bolts (500 nos), 1/2&quot; Quick-Disconnect Hydraulic Couplings, or 300mm FRP Ladder Cable Tray..."></textarea>
+            </div>
+
+            <div class="rfq-actions">
+              <button type="submit" class="btn btn--gold btn--lg magnetic" id="sendEmailBtn">
+                <span>Send Inquiry via Email</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+              </button>
+              <button type="button" class="btn btn--glass btn--lg" id="sendWhatsappBtn">
+                <span>Send via WhatsApp</span>
+              </button>
+            </div>
+
+            <div class="rfq-confirmation" id="rfqConfirmation" hidden>
+              <strong>Inquiry Formatted!</strong>
+              <p id="rfqConfirmationMsg"></p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="container footer__top">
+      <div class="footer__brand">
+        <div class="footer__logo-card">
+          <img src="gallery/logo.png" alt="Morzen Industries" width="150" />
+        </div>
+        <p class="footer__tagline">Stronger Connections | Higher Performance</p>
+        <p class="footer__summary">
+          Industrial Products &amp; Engineering Solutions — Fasteners, Hydraulic &amp; SS Fittings, High-Pressure Connectors, and FRP Cable Trays.
+        </p>
+      </div>
+
+      <div class="footer__col">
+        <h4>Product Divisions</h4>
+        <ul>
+          <li><a href="#card-fasteners">Fasteners (Hex Bolts, Nuts, Studs)</a></li>
+          <li><a href="#card-fittings">Hydraulic &amp; SS Fittings</a></li>
+          <li><a href="#card-connectors">Connectors &amp; Quick Couplings</a></li>
+          <li><a href="#card-frp">FRP Cable Trays &amp; Profiles</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>Grades &amp; Standards</h4>
+        <ul>
+          <li><a href="#standards">SS 304 / SS 316 / SS 316L</a></li>
+          <li><a href="#standards">High-Tensile 8.8 · 10.9 · 12.9</a></li>
+          <li><a href="#standards">Duplex &amp; Alloy Steel</a></li>
+          <li><a href="#standards">DIN · ISO · ASTM · BS</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>Corporate Office</h4>
+        <ul class="footer__contact-list">
+          <li><strong>Director:</strong> Neel Mistry</li>
+          <li><strong>Address:</strong> 306 Opal Square, Alkapuri, Vadodara – 390007</li>
+          <li><strong>Phone:</strong> <a href="tel:+919033868727">+91 90338 68727</a></li>
+          <li><strong>Email:</strong> <a href="mailto:morzen.industries@gmail.com">morzen.industries@gmail.com</a></li>
+          <li><strong>GSTIN:</strong> <code>24AKCPM5200E1ZU</code></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container footer__bottom">
+      <p>&copy; <span id="yearNow"></span> Morzen Industries. All Rights Reserved.</p>
+      <p class="footer__domain">www.morzenindustries.com · Stronger Connections | Higher Performance</p>
+    </div>
+  </footer>
+
+  <!-- ===================== INTERACTIVE PRODUCT SPECIFICATION MODAL ===================== -->
+  <div class="spec-modal" id="specModal" role="dialog" aria-modal="true" aria-labelledby="specModalTitle" hidden>
+    <div class="spec-modal__backdrop" id="specModalBackdrop"></div>
+    <div class="spec-modal__dialog">
+      <button type="button" class="spec-modal__close" id="specModalClose" aria-label="Close specification modal">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
+      </button>
+
+      <div class="spec-modal__media">
+        <img id="specModalImg" src="gallery/fasteners-hero.jpg" alt="" />
+        <span class="spec-modal__badge" id="specModalBadge">DIV // 01</span>
+      </div>
+
+      <div class="spec-modal__body">
+        <span class="mono-label" id="specModalEyebrow">TECHNICAL SPECIFICATION SHEET</span>
+        <h3 id="specModalTitle">Industrial Fasteners</h3>
+        <p id="specModalDesc"></p>
+
+        <div class="spec-modal__grid">
+          <div>
+            <h4>Included Components</h4>
+            <ul id="specModalItems"></ul>
+          </div>
+          <div>
+            <h4>Grades / Features &amp; Standards</h4>
+            <ul id="specModalMeta"></ul>
+          </div>
+        </div>
+
+        <div class="spec-modal__actions">
+          <button type="button" class="btn btn--gold" id="specModalQuoteBtn">Request Quote for This Division ↗</button>
+          <a href="tel:+919033868727" class="btn btn--glass">Call +91 90338 68727</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="preloader-3d.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
